@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SuggestionApp.DatabaseConnection;
 
 namespace SuggestionApp.Controllers
@@ -22,6 +23,16 @@ namespace SuggestionApp.Controllers
                 return Ok(employees);
             }
             return BadRequest("No employees found");    
+        }
+        [HttpGet("getsingleemployee")]
+        public IActionResult GetEmployeeByUsername(string username)
+        {
+            var user = _employeeDbContext.Employees.FirstOrDefault(x => x.Username == username);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            return BadRequest("This user can not be found");
         }
     }
 }
