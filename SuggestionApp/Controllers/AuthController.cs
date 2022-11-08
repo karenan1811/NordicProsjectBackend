@@ -46,7 +46,7 @@ namespace SuggestionApp.Controllers
             employee.EmploymentStartDate = employeeDto.EmploymentStartDate;
             employee.JobTitle = employeeDto.JobTitle;   
             employee.Username = employeeDto.Username;
-            employee.TeamId = employeeDto.TeamId;
+            employee.TeamName = employeeDto.TeamName;
             employee.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(employeeDto.Password));
             employee.PasswordSalt =hmac.Key;
             _employeeDbContext.Employees.Add(employee);

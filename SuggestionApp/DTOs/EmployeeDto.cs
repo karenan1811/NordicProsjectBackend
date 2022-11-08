@@ -16,6 +16,6 @@
         public DateTime Birthday { get; set; }
         public DateTime EmploymentStartDate { get; set; }
         public string JobTitle { get; set; }
-        public int TeamId { get; set; }
+        public string TeamName { get; set; }
     }
 }

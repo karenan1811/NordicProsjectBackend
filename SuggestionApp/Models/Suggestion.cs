@@ -12,6 +12,7 @@
         public string SuggestionStatus { get; set; }
         public string SuggestionGiver { get; set; }
         public string SuggestionTitle { get; set; }
+        public string TeamName { get; set; }
         public DateTime SuggestionDeadline { get; set; }
 
     }

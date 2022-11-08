@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SuggestionApp.DatabaseConnection;
+using SuggestionApp.Models;
 
 namespace SuggestionApp.Controllers
 {
@@ -20,6 +21,8 @@ namespace SuggestionApp.Controllers
             }
             return BadRequest("No suggestions found");
         }
+
+
         [HttpGet("getsuggestionbyusername")]
         public IActionResult GetEmployeeByUsername(string userName)
         {
@@ -30,5 +33,18 @@ namespace SuggestionApp.Controllers
             }
             return BadRequest(suggestions);
         }
+
+        [HttpPost("add")]
+        public IActionResult AddSuggestion(Suggestion suggestion)
+        {
+            if (suggestion == null)
+            {
+                return BadRequest("Suggestion can not be empty");
+            }
+            _employeeDbContext.Suggestions.Add(suggestion);
+            _employeeDbContext.SaveChanges();
+            return Ok(suggestion);
+        }
+
     }
 }
