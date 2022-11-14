@@ -5,9 +5,9 @@ namespace SuggestionApp.DatabaseConnection
 {
     public class EmployeeDbContext:DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+      public EmployeeDbContext(DbContextOptions<EmployeeDbContext> options): base(options)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=EmployeesDatabase; Trusted_Connection=true");
+           
         }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Team> Teams { get; set; }

@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  employeesdb:
+    image: mariadb
+    restart: always
+    ports:
+      - "3308:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: 97033
+      MARIADB_DATABASE: employeesdb
+      MARIADB_USER: root
+    volumes:
+      # persist data files into `datadir` volume managed by docker
+
+      # bind-mount any sql files that should be run while initializing
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  suggestionapp:
+    image: ${DOCKER_REGISTRY-}suggestionapp
+    build:
+      context: .
+      dockerfile: SuggestionApp/Dockerfile
+    ports:
+      - "7116:7116"
+    depends_on: 
+     - employeesdb
+  
+  frontend:
+    build: ../../SuggestionUI/NordicProjectFrontend
+    ports:
+      - "4200:80"

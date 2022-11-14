@@ -1,8 +1,10 @@
-﻿namespace SuggestionApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SuggestionApp.Models
 {
     public class Team:IEntity
     {
-        public int TeamId { get; set; }
+        [Key]
         public string TeamName { get; set; }
         public string TeamLeader { get; set; }
     }

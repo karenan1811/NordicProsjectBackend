@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using SuggestionApp.DatabaseConnection;
 using SuggestionApp.Interfaces;
 using SuggestionApp.Services;
@@ -10,7 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<EmployeeDbContext>(); 
+builder.Services.AddTransient<EmployeeDbContext>(); 
 builder.Services.AddScoped<ITokenService,TokenManager>();
 builder.Services.AddCors(option=>
 {
@@ -20,6 +21,10 @@ builder.Services.AddCors(option=>
     });
 });
 
+builder.Services.AddDbContext<EmployeeDbContext>(options =>
+{
+    options.UseMySql(builder.Configuration.GetConnectionString("MariaDb"), ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MariaDb")));
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

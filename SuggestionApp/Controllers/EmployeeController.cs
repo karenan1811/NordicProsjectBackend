@@ -58,5 +58,30 @@ namespace SuggestionApp.Controllers
             }
             return BadRequest(user);
         }
+
+        [HttpPost("changeemployeeteam")]
+        public IActionResult GetEmployeeByName(ChangeTeamDto changeTeamDto)
+        {
+            var user = _employeeDbContext.Employees.FirstOrDefault(x => (x.FirstName.ToLower() == changeTeamDto.FirstName && x.LastName.ToLower() == changeTeamDto.LastName.ToLower()));
+            if (user != null)
+            {
+                user.TeamName = changeTeamDto.TeamName;
+                _employeeDbContext.Employees.Update(user);
+                _employeeDbContext.SaveChanges();
+                return Ok(user);
+            }
+            return BadRequest(user);
+        }
+
+        [HttpGet("getemployeesbyteamname")]
+        public IActionResult GetEmployeeByTeamName(string teamName)
+        {
+            var users = _employeeDbContext.Employees.Where(p => p.TeamName.ToLower() == teamName.ToLower()).ToList();
+            if (users != null)
+            {
+                return Ok(users);
+            }
+            return BadRequest(users);
+        }
     }
 }

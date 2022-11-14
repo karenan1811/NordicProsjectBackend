@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SuggestionApp.DatabaseConnection;
+using SuggestionApp.Models;
 
 namespace SuggestionApp.Controllers
 {
@@ -21,7 +23,29 @@ namespace SuggestionApp.Controllers
             {
                 return Ok(teams);
             }
-            return BadRequest("No employees found");
+            return BadRequest("No teams found");
+        }
+
+        [HttpGet("getteambyname")]
+        public IActionResult GetTeamByName(string teamName)
+        {
+            var team = _employeeDbContext.Teams.FirstOrDefault(x => x.TeamName.ToLower() == teamName.ToLower());
+            if (team != null)
+            {
+                return Ok(team);
+            }
+            return BadRequest(team);
+        }
+        [HttpPost("add")]
+        public IActionResult Register(Team team)
+        {
+            if (team == null)
+            {
+                return BadRequest("Team can not be empty");
+            }
+            _employeeDbContext.Teams.Add(team);
+            _employeeDbContext.SaveChanges();
+            return Ok(team);
         }
     }
 }
