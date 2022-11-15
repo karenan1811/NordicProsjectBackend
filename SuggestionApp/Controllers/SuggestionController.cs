@@ -12,7 +12,7 @@ namespace SuggestionApp.Controllers
       private readonly  EmployeeDbContext _employeeDbContext;
         public SuggestionController(EmployeeDbContext employeeDbContext)
         {
-            _employeeDbContext = employeeDbContext; 
+            _employeeDbContext = employeeDbContext;
         }
 
         [HttpGet]

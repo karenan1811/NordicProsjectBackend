@@ -14,7 +14,7 @@ services:
       # persist data files into `datadir` volume managed by docker
 
       # bind-mount any sql files that should be run while initializing
-      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./init:/docker-entrypoint-initdb.d
 
   suggestionapp:
     image: ${DOCKER_REGISTRY-}suggestionapp
