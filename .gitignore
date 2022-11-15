@@ -306,7 +306,6 @@ FakesAssemblies/
 # Logs and databases #
 ######################
 *.log
-*.sql
 *.sqlite
 *.db
 
