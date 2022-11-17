@@ -22,7 +22,7 @@ services:
       context: .
       dockerfile: SuggestionApp/Dockerfile
     ports:
-      - "7116:7116"
+      - "55000:443"
     depends_on: 
      - employeesdb
   
