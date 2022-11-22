@@ -18,5 +18,6 @@
         public DateTime EmploymentStartDate { get; set; }
         public string JobTitle { get; set; }
         public string TeamName { get; set; }
+        public string EmployeeRole { get; set; }
     }
 }

@@ -47,6 +47,7 @@ namespace SuggestionApp.Controllers
             employee.JobTitle = employeeDto.JobTitle;   
             employee.Username = employeeDto.Username;
             employee.TeamName = employeeDto.TeamName;
+            employee.EmployeeRole = employeeDto.EmployeeRole;   
             employee.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(employeeDto.Password));
             employee.PasswordSalt =hmac.Key;
             _employeeDbContext.Employees.Add(employee);
@@ -86,7 +87,8 @@ namespace SuggestionApp.Controllers
             return new UserDto
             {
                 Username = user.Username,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                EmployeeRole = employee.EmployeeRole
             };
         }
     }
